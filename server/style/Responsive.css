@@ -1,0 +1,31 @@
+#boxContainer{
+	display: flex;
+	flex-wrap: wrap;
+
+	border:1px solid red;
+	/* padding:10px; */
+}
+
+.box{
+	height:150px;
+}
+
+@media (max-width: 400px) {
+	.box{
+		flex:100%;
+	}
+
+}
+
+@media (min-width: 400px) and (max-width: 800px) {
+	.box{
+		flex:50%;
+	}
+}
+
+@media (min-width: 800px){
+	.box{
+		flex:25%;
+	}
+}
+
