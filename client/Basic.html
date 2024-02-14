@@ -2,14 +2,29 @@
 <html>
 	<head>
 		<title>Title of Document</title>
+		<style>
+			#button{
+				background-color: darkgreen;
+				color: white;
+				padding: 5px 25px 5px 25px;
+				border-radius: 15px;
+				width: 120px;
+			}
+		</style>
 		<script>
 			document.addEventListener("DOMContentLoaded", function(event) {
-				console.log("Hello World.");
+				console.error("Hello World.");
+				let button = document.getElementById("button");
+				let header = document.getElementById("header");
+				button.onclick = function(event){
+					button.innerHTML = "Button is clicked.";
+					header.style.color = "red";
+				}
 			});
 		</script>
 	</head>
 	<body>
-		<h1>This is the Header.</h1>
+		<h1 id="header">This is the Header.</h1>
 		<div id="button">click me</div>
 	</body>
 </html>
