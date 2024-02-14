@@ -17,6 +17,14 @@ require_once("DataFetcher.php");
 	}
 </style>
 
+<style>
+		</style>
+		<script>
+			document.addEventListener("DOMContentLoaded", function(event) {
+				console.log("Hello World.");
+			});
+		</script>
+
 <script>
 	const ROOT_URL = "http://localhost/CAPSTONE/";
 	async function renderStudent(){
