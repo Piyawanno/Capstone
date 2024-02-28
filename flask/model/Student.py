@@ -1,5 +1,8 @@
 from datetime import datetime
 from faker import Faker
+from typing import Dict, Any
+
+import sqlite3
 
 DATE_FORMAT = '%Y-%m-%d'
 
@@ -23,6 +26,24 @@ class Student:
 			'email': self.email,
 			'birthDate': self.birthDate.strftime(DATE_FORMAT),
 		}
+	
+	def fromDict(self, data: Dict[str, Any]):
+		self.firstName = data['firstName']
+		self.lastName = data['lastName']
+		self.email = data['email']
+		self.birthDate = datetime.strptime(data['birthDate'], DATE_FORMAT)
+		return self
+	
+	def insert(self, cursor: sqlite3.Connection):
+		cursor.execute(
+			"INSERT INTO Student(firstName, lastName, email, birthDATE) VALUES(?, ?, ?, ?)",
+			[
+				self.firstName,
+				self.lastName,
+				self.email,
+				self.birthDate.date(),
+			]
+		)
 
 if __name__ == '__main__':
 	# pretty print

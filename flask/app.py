@@ -1,7 +1,9 @@
 from flask import Flask
 from jinja2 import Template
 from datetime import datetime
+from faker import Faker
 
+from model.Student import Student
 from util import readConfig, readTemplate
 
 import json
@@ -33,6 +35,23 @@ def renderIndex():
 		rootURL=rootURL,
 		form=form.render(),
 	)
+
+@app.post("/insertMPA")
+def insertMPA():
+	from flask import request
+	import pprint
+	pprint.pprint(dict(request.form))
+	student = Student().fromDict(dict(request.form))
+	
+	return "INSERT MPA"
+
+@app.route("/getStudent")
+def getStudent():
+	faker = Faker()
+	student = Student()
+	student.generate(faker)
+	return student.toDict()
+
 
 if __name__ == '__main__':
 	app.run(host='localhost', port=8080)
