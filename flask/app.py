@@ -1,5 +1,8 @@
 from flask import Flask
+from jinja2 import Template
 from datetime import datetime
+
+from util import readConfig, readTemplate
 
 import json
 
@@ -22,9 +25,10 @@ def getData():
 
 @app.route("/")
 def renderIndex():
-	with open('template/index.html') as fd:
-		content = fd.read()
-	return content
+	config = readConfig()
+	rootURL = config["rootURL"]
+	template = readTemplate("index.html")
+	return template.render(rootURL=rootURL)
 
 if __name__ == '__main__':
 	app.run(host='localhost', port=8080)
