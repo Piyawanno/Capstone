@@ -6,8 +6,21 @@
 		data.email = document.getElementById("email").value;
 		data.birthDate = document.getElementById("birthDate").value;
 		console.log(data);
+		sendStudentData(data);
 		return false;
 	}
+
+	async function sendStudentData(data){
+	let response = await fetch(
+		`${rootURL}insertSPA`,{
+			method: "POST",
+			headers: {'Content-Type': 'application/json'},
+			body: JSON.stringify(data)
+		}
+	);
+	let result = await response.json();
+	console.log(result);
+}
 </script>
 <form>
 	<p><input name="firstName" id="firstName" placeholder="firstName"/></p>

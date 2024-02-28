@@ -48,6 +48,18 @@ def insertMPA():
 	student.insert(cursor)
 	return "INSERT MPA"
 
+@app.post("/insertSPA")
+def insertSPA():
+	from flask import request
+	import pprint
+	pprint.pprint(request.get_json())
+	config = readConfig()
+	dataPath = config['dataPath']
+	cursor = connectDB(dataPath)
+	student = Student().fromDict(request.get_json())
+	student.insert(cursor)
+	return {'isSuccess': True}
+
 @app.route("/getStudent")
 def getStudent():
 	from typing import List
