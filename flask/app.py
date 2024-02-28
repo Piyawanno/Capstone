@@ -29,7 +29,7 @@ def getData():
 def renderIndex():
 	config = readConfig()
 	rootURL = config["rootURL"]
-	form = readTemplate('MPAForm.html')
+	form = readTemplate('SPAForm.html')
 	template = readTemplate("index.html")
 	return template.render(
 		rootURL=rootURL,
