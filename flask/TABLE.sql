@@ -1,0 +1,7 @@
+CREATE TABLE Student(
+	id INTEGER PRIMARY KEY AUTOINCREMENT,
+	firstName VARCHAR(64),
+	lastName VARCHAR(64),
+	email VARCHAR(64),
+	birthDate DATE
+);
