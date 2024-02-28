@@ -5,6 +5,7 @@ import json, sqlite3
 
 def connectDB(path: str) -> sqlite3.Connection:
 	connection = sqlite3.connect(path, isolation_level=None, check_same_thread=False)
+	connection.row_factory = sqlite3.Row
 	return connection.cursor()
 
 def readConfig() -> Dict[str, Any]:

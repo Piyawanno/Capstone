@@ -34,6 +34,9 @@ class Student:
 		self.birthDate = datetime.strptime(data['birthDate'], DATE_FORMAT)
 		return self
 	
+	def register(self):
+		print(">>> DO FOO")
+
 	def insert(self, cursor: sqlite3.Connection):
 		cursor.execute(
 			"INSERT INTO Student(firstName, lastName, email, birthDATE) VALUES(?, ?, ?, ?)",

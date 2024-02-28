@@ -4,7 +4,7 @@ from datetime import datetime
 from faker import Faker
 
 from model.Student import Student
-from util import readConfig, readTemplate
+from util import readConfig, readTemplate, connectDB
 
 import json
 
@@ -41,16 +41,28 @@ def insertMPA():
 	from flask import request
 	import pprint
 	pprint.pprint(dict(request.form))
+	config = readConfig()
+	dataPath = config['dataPath']
+	cursor = connectDB(dataPath)
 	student = Student().fromDict(dict(request.form))
-	
+	student.insert(cursor)
 	return "INSERT MPA"
 
 @app.route("/getStudent")
 def getStudent():
-	faker = Faker()
-	student = Student()
-	student.generate(faker)
-	return student.toDict()
+	from typing import List
+	config = readConfig()
+	dataPath = config['dataPath']
+	cursor = connectDB(dataPath)
+	cursor.execute("SELECT * FROM student")
+	result: List[Student] = []
+	while True:
+		raw = cursor.fetchone()
+		if raw is None: break
+		student = Student().fromDict(raw)
+		student.register()
+		result.append(student)
+	return [i.toDict() for i in result]
 
 
 if __name__ == '__main__':
