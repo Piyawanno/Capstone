@@ -20,5 +20,11 @@ def getData():
 	print(type(dumped))
 	return dumped
 
+@app.route("/")
+def renderIndex():
+	with open('template/index.html') as fd:
+		content = fd.read()
+	return content
+
 if __name__ == '__main__':
 	app.run(host='localhost', port=8080)
