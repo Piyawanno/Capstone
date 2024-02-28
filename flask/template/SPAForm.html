@@ -11,16 +11,33 @@
 	}
 
 	async function sendStudentData(data){
-	let response = await fetch(
-		`${rootURL}insertSPA`,{
-			method: "POST",
-			headers: {'Content-Type': 'application/json'},
-			body: JSON.stringify(data)
+		let response = await fetch(
+			`${rootURL}insertSPA`,{
+				method: "POST",
+				headers: {'Content-Type': 'application/json'},
+				body: JSON.stringify(data)
+			}
+		);
+		let result = await response.json();
+		await renderStudent();
+	}
+
+	async function renderStudent(){
+		let studentList = await fetchStudent();
+		let list = document.getElementById("studentList");
+		list.innerHTML = "";
+		for(let student of studentList){
+			let item = document.createElement('li');
+			item.innerHTML = `${student.firstName} ${student.lastName} (${student.email})`;
+			list.append(item);
 		}
-	);
-	let result = await response.json();
-	console.log(result);
-}
+	}
+
+	async function fetchStudent(){
+		let response = await fetch(`${rootURL}getStudent`);
+		let studentList = await response.json();
+		return studentList;
+	}
 </script>
 <form>
 	<p><input name="firstName" id="firstName" placeholder="firstName"/></p>

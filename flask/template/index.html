@@ -7,11 +7,13 @@
 		<script>
 			let rootURL = "{{rootURL}}";
 			document.addEventListener("DOMContentLoaded", function(event) {
+				renderStudent();
 			});
 		</script>
 	</head>
 	<body>
 		<h1>MPA vs. SPA</h1>
 		Form {{ form }}
+		<ul id="studentList"></ul>
 	</body>
 </html>
