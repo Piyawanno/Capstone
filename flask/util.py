@@ -20,6 +20,7 @@ def readTemplate(templateName: str) -> Template:
 if __name__ == '__main__':
 	cursor = connectDB("DATA.sqlite.bin")
 	print("Database is connected.")
-	with open('TABLE.sql') as fd:
-		cursor.execute(fd.read())
-	print("Table is created.")
+	if False:
+		with open('TABLE.sql') as fd:
+			cursor.execute(fd.read())
+		print("Table is created.")

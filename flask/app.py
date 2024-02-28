@@ -27,8 +27,12 @@ def getData():
 def renderIndex():
 	config = readConfig()
 	rootURL = config["rootURL"]
+	form = readTemplate('MPAForm.html')
 	template = readTemplate("index.html")
-	return template.render(rootURL=rootURL)
+	return template.render(
+		rootURL=rootURL,
+		form=form.render(),
+	)
 
 if __name__ == '__main__':
 	app.run(host='localhost', port=8080)
